@@ -1,6 +1,6 @@
 export default function CallToAction() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="section relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-[#1a5f7a] via-[#157f7e] to-[#0d9488] opacity-95"></div>
       <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full opacity-5 -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full opacity-5 translate-x-1/2 translate-y-1/2"></div>
@@ -14,7 +14,13 @@ export default function CallToAction() {
             mejor cobertura para tus necesidades
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a className="group relative inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#157f7e] font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto cursor-pointer">
+            <a
+              className="group relative inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#157f7e] font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto cursor-pointer"
+              onClick={() => {
+                const element = document.getElementById("contacto");
+                element?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

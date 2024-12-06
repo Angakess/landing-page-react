@@ -1,4 +1,16 @@
+import { useState } from "react";
+
 export default function Footer() {
+  const [email, setEmail] = useState("");
+
+  function handleOnChange(value) {
+    setEmail(value);
+  }
+
+  function handleOnClick(e) {
+    const section = e.innerHTML;
+  }
+
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto px-4">
@@ -20,7 +32,8 @@ export default function Footer() {
                   placeholder="Tu correo electrónico"
                   className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:border-[rgb(19,120,119)] focus:ring-2 focus:ring-[rgb(19,120,119)] focus:ring-opacity-20 transition-all duration-200"
                   required=""
-                  value=""
+                  onChange={(e) => handleOnChange(e.target.value)}
+                  value={email}
                 />
                 <button
                   type="submit"
@@ -35,9 +48,20 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6 inline-block relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bottom-[-4px] after:left-0 after:bg-gradient-to-r after:from-[rgb(19,120,119)] after:to-transparent">
               Enlaces rápidos
             </h4>
-            <ul className="space-y-2">
+            <ul
+              className="space-y-2"
+              onClick={(event) => {
+                const target = event.target;
+                const id = target.innerHTML.toLowerCase();
+                const element = document.getElementById(id);
+                element?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               <li>
-                <a className="hover:text-[rgb(19,120,119)] cursor-pointer">
+                <a
+                  className="hover:text-[rgb(19,120,119)] cursor-pointer"
+                  onClick={(e) => handleOnClick(e)}
+                >
                   Inicio
                 </a>
               </li>

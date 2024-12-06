@@ -1,8 +1,28 @@
+import { useEffect, useState } from "react";
+
 export default function Contact() {
+  const [info, setInfo] = useState({
+    name: "",
+    business: "",
+    email: "",
+    message: "",
+  });
+
+  function handleOnChange(key, value) {
+    setInfo({
+      ...info,
+      [key]: value,
+    });
+  }
+  function handleOnClick(){
+    console.log(info)
+  }
+
+
   return (
     <div
       id="contacto"
-      className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-16"
+      className="section min-h-screen bg-gradient-to-b from-white to-gray-50 py-16"
     >
       <div className="container mx-auto px-4 max-w-2xl">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
@@ -15,7 +35,7 @@ export default function Contact() {
           <form className="space-y-6">
             <div>
               <label
-                for="name"
+                htmlFor="name"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Nombre <span className="text-red-500">*</span>
@@ -27,28 +47,34 @@ export default function Contact() {
                 placeholder="Nombre Completo"
                 className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[rgb(19,120,119)] focus:ring-2 focus:ring-[rgb(19,120,119)] focus:ring-opacity-20 transition-all duration-200"
                 required=""
-                value=""
+                onChange={(e) => {
+                  handleOnChange(e.target.name, e.target.value);
+                }}
+                value={info.name}
               />
             </div>
             <div>
               <label
-                for="company"
+                htmlFor="company"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Empresa
               </label>
               <input
                 type="text"
-                id="company"
-                name="company"
+                id="business"
+                name="business"
                 placeholder="Nombre de su empresa"
                 className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[rgb(19,120,119)] focus:ring-2 focus:ring-[rgb(19,120,119)] focus:ring-opacity-20 transition-all duration-200"
-                value=""
+                onChange={(e) => {
+                  handleOnChange(e.target.name, e.target.value);
+                }}
+                value={info.business}
               />
             </div>
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Correo electrónico <span className="text-red-500">*</span>
@@ -60,12 +86,15 @@ export default function Contact() {
                 placeholder="Su correo"
                 className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[rgb(19,120,119)] focus:ring-2 focus:ring-[rgb(19,120,119)] focus:ring-opacity-20 transition-all duration-200"
                 required=""
-                value=""
+                onChange={(e) => {
+                  handleOnChange(e.target.name, e.target.value);
+                }}
+                value={info.email}
               />
             </div>
             <div>
               <label
-                for="message"
+                htmlFor="message"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Mensaje <span className="text-red-500">*</span>
@@ -77,11 +106,16 @@ export default function Contact() {
                 placeholder="Ingrese su mensaje"
                 className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[rgb(19,120,119)] focus:ring-2 focus:ring-[rgb(19,120,119)] focus:ring-opacity-20 transition-all duration-200 resize-none"
                 required=""
+                onChange={(e) => {
+                  handleOnChange(e.target.name, e.target.value);
+                }}
+                value={info.message}
               ></textarea>
             </div>
             <button
-              type="submit"
+              type="button"
               className="w-full bg-gradient-to-r from-[rgb(19,120,119)] to-teal-600 text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-[rgb(19,120,119)] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              onClick={handleOnClick}
             >
               Enviar mensaje
             </button>
