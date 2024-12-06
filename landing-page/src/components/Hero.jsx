@@ -1,10 +1,12 @@
+import img1 from "../assets/hero.png"
+
 export default function Hero() {
   return (
     <section id="inicio" className="relative h-screen overflow-hidden">
       <div className="absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-100">
         <img
           className="object-cover w-full h-full"
-          src="src/assets/hero.png"
+          src={img1}
         ></img>
       </div>
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
