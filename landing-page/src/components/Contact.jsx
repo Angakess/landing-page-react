@@ -20,7 +20,7 @@ export default function Contact() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/send-mail", {
+      const res = await fetch("https://digiano-asesores-backend-285770e645e0.herokuapp.com/send-mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(info),
