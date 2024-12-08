@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "cd backend && npm start",
+    "start": "cd backend && npm install && npm start",
     "heroku-postbuild": "cd landing-page && npm install && npm run build && cp -r dist ../backend/public"
   },
   "dependencies": {
