@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
+    /* origin:"http://localhost:5173", */
     origin: "https://franco-asesores.netlify.app", // URL del frontend durante el desarrollo
     methods: ["GET", "POST"], // Métodos permitidos
     allowedHeaders: ["Content-Type"],
@@ -19,7 +20,7 @@ app.use(
 app.use(express.json());
 
 // Ruta para servir los archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "../landing-page/dist")));
 
 // Ruta para manejar el envío de correos
 app.post("/send-mail", async (req, res) => {
@@ -63,7 +64,7 @@ app.post("/send-mail", async (req, res) => {
 
 // Ruta para manejar otras solicitudes (SPA)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "../landing-page/dist", "index.html"));
 });
 
 app.listen(PORT, () =>
