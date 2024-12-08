@@ -5,5 +5,8 @@
   "scripts": {
     "start": "cd backend && npm start",
     "heroku-postbuild": "cd landing-page && npm install && npm run build && cp -r dist ../backend/public"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
