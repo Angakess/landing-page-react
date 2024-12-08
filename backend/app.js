@@ -9,8 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // URL del frontend durante el desarrollo
+    origin: "https://franco-asesores.netlify.app", // URL del frontend durante el desarrollo
     methods: ["GET", "POST"], // Métodos permitidos
+    allowedHeaders: ["Content-Type"],
   })
 );
 
@@ -54,7 +55,7 @@ app.post("/send-mail", async (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return res.status(500).json({ message: "Error al enviar el mensaje" });
+      return res.status(500).json({ message: "Error al enviar el mensaje - "+error });
     }
     res.status(200).json({ message: "Correo enviado correctamente" });
   });
