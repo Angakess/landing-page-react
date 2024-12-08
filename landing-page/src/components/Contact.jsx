@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 export default function Contact() {
   const [info, setInfo] = useState({
     name: "",
-    business: "",
+    subject: "",
     email: "",
     message: "",
   });
+
+  //3798fcf9-ac16-467c-bce2-fda624b800b4
 
   function handleOnChange(key, value) {
     setInfo({
@@ -14,10 +16,29 @@ export default function Contact() {
       [key]: value,
     });
   }
-  function handleOnClick(){
-    console.log(info)
-  }
+  async function handleOnSubmit(e) {
+    e.preventDefault();
 
+    try {
+      const res = await fetch("http://localhost:3000/send-mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(info),
+      });
+
+      if (!res.ok) {
+        // Manejo de errores si el servidor responde con un código no exitoso
+        console.error(`Error: ${res.status}`);
+        return;
+      }
+
+      // Parsear el JSON solo si la respuesta es exitosa
+      const result = await res.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+    }
+  }
 
   return (
     <div
@@ -32,7 +53,7 @@ export default function Contact() {
           Déjanos tu mensaje y un asesor se comunicará contigo a la brevedad
         </p>
         <div className="bg-white rounded-2xl shadow-xl p-8 transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={(e) => handleOnSubmit(e)}>
             <div>
               <label
                 htmlFor="name"
@@ -63,13 +84,13 @@ export default function Contact() {
               <input
                 type="text"
                 id="business"
-                name="business"
+                name="subject"
                 placeholder="Nombre de su empresa"
                 className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[rgb(19,120,119)] focus:ring-2 focus:ring-[rgb(19,120,119)] focus:ring-opacity-20 transition-all duration-200"
                 onChange={(e) => {
                   handleOnChange(e.target.name, e.target.value);
                 }}
-                value={info.business}
+                value={info.subject}
               />
             </div>
             <div>
@@ -113,9 +134,11 @@ export default function Contact() {
               ></textarea>
             </div>
             <button
-              type="button"
+              type="submit"
               className="w-full bg-gradient-to-r from-[rgb(19,120,119)] to-teal-600 text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-[rgb(19,120,119)] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-              onClick={handleOnClick}
+              disabled={
+                info.name == "" || info.email == "" || info.message == ""
+              }
             >
               Enviar mensaje
             </button>
