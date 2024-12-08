@@ -1,0 +1,9 @@
+{
+  "name": "insurance-landing-page",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cd backend && npm start",
+    "heroku-postbuild": "cd landing-page && npm install && npm run build && cp -r dist ../backend/public"
+  }
+}
